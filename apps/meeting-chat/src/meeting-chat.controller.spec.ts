@@ -11,7 +11,9 @@ describe('MeetingChatController', () => {
       providers: [MeetingChatService],
     }).compile();
 
-    meetingChatController = app.get<MeetingChatController>(MeetingChatController);
+    meetingChatController = app.get<MeetingChatController>(
+      MeetingChatController,
+    );
   });
 
   describe('root', () => {

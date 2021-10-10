@@ -11,7 +11,9 @@ describe('NestServiceController', () => {
       providers: [NestServiceService],
     }).compile();
 
-    nestServiceController = app.get<NestServiceController>(NestServiceController);
+    nestServiceController = app.get<NestServiceController>(
+      NestServiceController,
+    );
   });
 
   describe('root', () => {
