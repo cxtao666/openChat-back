@@ -18,7 +18,7 @@ describe('NestServiceController', () => {
 
   describe('root', () => {
     it('should return "Hello World!"', () => {
-      expect(nestServiceController.getHello()).toBe('Hello World!');
+      expect(nestServiceController.getHello()).toBe('蔡贤涛');
     });
   });
 });

@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { AppService } from './app.service';
+import { UserModule } from './modules/user/user.module';
+import { DatabaseModule } from './modules/databse/database.module';
 
 @Module({
   imports: [
@@ -14,6 +16,8 @@ import { AppService } from './app.service';
         },
       },
     ]),
+    DatabaseModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
