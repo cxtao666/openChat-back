@@ -626,6 +626,18 @@
     tslib "2.3.1"
     uuid "8.3.2"
 
+"@nestjs/config@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.npmmirror.com/@nestjs/config/download/@nestjs/config-1.0.2.tgz#2eec40f7c4c09fcbe3ece1dc5025e2145eb275f1"
+  integrity sha1-LuxA98TAn8vj7OHcUCXiFF6ydfE=
+  dependencies:
+    dotenv "10.0.0"
+    dotenv-expand "5.1.0"
+    lodash.get "4.4.2"
+    lodash.has "4.5.2"
+    lodash.set "4.3.2"
+    uuid "8.3.2"
+
 "@nestjs/core@^8.0.0":
   version "8.0.9"
   resolved "https://registry.npmmirror.com/@nestjs/core/download/@nestjs/core-8.0.9.tgz?cache=0&sync_timestamp=1633004185807&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40nestjs%2Fcore%2Fdownload%2F%40nestjs%2Fcore-8.0.9.tgz#49e27b726ec6cd12474d18cd8cafd9e44761468d"
@@ -865,6 +877,13 @@
   version "2.8.12"
   resolved "https://registry.nlark.com/@types/cors/download/@types/cors-2.8.12.tgz?cache=0&sync_timestamp=1629707095676&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40types%2Fcors%2Fdownload%2F%40types%2Fcors-2.8.12.tgz#6b2c510a7ad7039e98e7b8d3d6598f4359e5c080"
   integrity sha1-ayxRCnrXA56Y57jT1lmPQ1nlwIA=
+
+"@types/dotenv@^8.2.0":
+  version "8.2.0"
+  resolved "https://registry.nlark.com/@types/dotenv/download/@types/dotenv-8.2.0.tgz#5cd64710c3c98e82d9d15844375a33bf1b45d053"
+  integrity sha1-XNZHEMPJjoLZ0VhEN1ozvxtF0FM=
+  dependencies:
+    dotenv "*"
 
 "@types/eslint-scope@^3.7.0":
   version "3.7.1"
@@ -1974,7 +1993,14 @@ create-require@^1.1.0:
   resolved "https://registry.nlark.com/create-require/download/create-require-1.1.1.tgz#c1d7e8f1e5f6cfc9ff65f9cd352d37348756c333"
   integrity sha1-wdfo8eX2z8n/ZfnNNS03NIdWwzM=
 
-cross-spawn@^7.0.0, cross-spawn@^7.0.2, cross-spawn@^7.0.3:
+cross-env@^7.0.3:
+  version "7.0.3"
+  resolved "https://registry.nlark.com/cross-env/download/cross-env-7.0.3.tgz#865264b29677dc015ba8418918965dd232fc54cf"
+  integrity sha1-hlJkspZ33AFbqEGJGJZd0jL8VM8=
+  dependencies:
+    cross-spawn "^7.0.1"
+
+cross-spawn@^7.0.0, cross-spawn@^7.0.1, cross-spawn@^7.0.2, cross-spawn@^7.0.3:
   version "7.0.3"
   resolved "https://registry.nlark.com/cross-spawn/download/cross-spawn-7.0.3.tgz#f73a85b9d5d41d045551c177e2882d4ac85728a6"
   integrity sha1-9zqFudXUHQRVUcF34ogtSshXKKY=
@@ -2108,6 +2134,16 @@ domexception@^2.0.1:
   integrity sha1-+0Su+6eT4VdLCvau0oAdBXUp8wQ=
   dependencies:
     webidl-conversions "^5.0.0"
+
+dotenv-expand@5.1.0:
+  version "5.1.0"
+  resolved "https://registry.npm.taobao.org/dotenv-expand/download/dotenv-expand-5.1.0.tgz?cache=0&sync_timestamp=1603163578680&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fdotenv-expand%2Fdownload%2Fdotenv-expand-5.1.0.tgz#3fbaf020bfd794884072ea26b1e9791d45a629f0"
+  integrity sha1-P7rwIL/XlIhAcuomsel5HUWmKfA=
+
+dotenv@*, dotenv@10.0.0, dotenv@^10.0.0:
+  version "10.0.0"
+  resolved "https://registry.nlark.com/dotenv/download/dotenv-10.0.0.tgz?cache=0&sync_timestamp=1621627076012&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fdotenv%2Fdownload%2Fdotenv-10.0.0.tgz#3d4227b8fb95f81096cdd2b66653fb2c7085ba81"
+  integrity sha1-PUInuPuV+BCWzdK2ZlP7LHCFuoE=
 
 dotenv@^8.2.0:
   version "8.6.0"
@@ -3680,10 +3716,25 @@ lodash.clonedeep@^4.5.0:
   resolved "https://registry.nlark.com/lodash.clonedeep/download/lodash.clonedeep-4.5.0.tgz#e23f3f9c4f8fbdde872529c1071857a086e5ccef"
   integrity sha1-4j8/nE+Pvd6HJSnBBxhXoIblzO8=
 
+lodash.get@4.4.2:
+  version "4.4.2"
+  resolved "https://registry.npm.taobao.org/lodash.get/download/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
+  integrity sha1-LRd/ZS+jHpObRDjVNBSZ36OCXpk=
+
+lodash.has@4.5.2:
+  version "4.5.2"
+  resolved "https://registry.npm.taobao.org/lodash.has/download/lodash.has-4.5.2.tgz#d19f4dc1095058cccbe2b0cdf4ee0fe4aa37c862"
+  integrity sha1-0Z9NwQlQWMzL4rDN9O4P5Ko3yGI=
+
 lodash.merge@^4.6.2:
   version "4.6.2"
   resolved "https://registry.npm.taobao.org/lodash.merge/download/lodash.merge-4.6.2.tgz#558aa53b43b661e1925a0afdfa36a9a1085fe57a"
   integrity sha1-VYqlO0O2YeGSWgr9+japoQhf5Xo=
+
+lodash.set@4.3.2:
+  version "4.3.2"
+  resolved "https://registry.npm.taobao.org/lodash.set/download/lodash.set-4.3.2.tgz#d8757b1da807dde24816b0d6a84bea1a76230b23"
+  integrity sha1-2HV7HagH3eJIFrDWqEvqGnYjCyM=
 
 lodash.truncate@^4.4.2:
   version "4.4.2"
@@ -5197,11 +5248,6 @@ utils-merge@1.0.1:
 uuid@8.3.2:
   version "8.3.2"
   resolved "https://registry.nlark.com/uuid/download/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
-  integrity sha1-gNW1ztJxu5r2xEXyGhoExgbO++I=
-
-uuid@^8.3.2:
-  version "8.3.2"
-  resolved "https://registry.nlark.com/uuid/download/uuid-8.3.2.tgz?cache=0&sync_timestamp=1622213136953&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fuuid%2Fdownload%2Fuuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
   integrity sha1-gNW1ztJxu5r2xEXyGhoExgbO++I=
 
 v8-compile-cache@^2.0.3:

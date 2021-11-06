@@ -7,12 +7,12 @@
   "license": "UNLICENSED",
   "scripts": {
     "prebuild": "rimraf dist",
-    "build": "nest build",
+    "build": "cross-env NODE_ENV=production nest build && cross-env NODE_ENV=production nest build meeting-chat",
     "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
     "start": "nest start",
-    "start:dev": "nest start --watch",
+    "start:dev": "cross-env NODE_ENV=development nest start --watch",
     "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/main",
+    "start:prod": "cross-env NODE_ENV=production nest start",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
+    "@nestjs/config": "^1.0.2",
     "@nestjs/core": "^8.0.0",
     "@nestjs/microservices": "^8.0.9",
     "@nestjs/platform-express": "^8.0.0",
@@ -31,13 +32,13 @@
     "@nestjs/typeorm": "^8.0.2",
     "@nestjs/websockets": "^8.0.11",
     "@types/ws": "^8.2.0",
+    "cross-env": "^7.0.3",
     "mysql": "^2.18.1",
     "node-uuid": "^1.4.8",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
-    "typeorm": "^0.2.38",
-    "uuid": "^8.3.2"
+    "typeorm": "^0.2.38"
   },
   "devDependencies": {
     "@nestjs/cli": "^8.0.0",

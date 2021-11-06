@@ -8,3 +8,11 @@ services:
       dockerfile: ./build/meeting-chat.Dockerfile 
     ports:
       - 127.0.0.1:5001:5001
+  meeting:
+    image: meeting  #镜像
+    container_name: meeting-app  #容器名称  
+    build:
+      context: .
+      dockerfile: ./build/meeting-app.Dockerfile 
+    ports:
+      - 127.0.0.1:3001:3000
