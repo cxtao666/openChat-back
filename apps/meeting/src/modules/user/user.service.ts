@@ -30,4 +30,9 @@ export class UserService {
     await this.userRepository.insert(user);
     return null;
   }
+
+  async find(id: string) {
+    const user = await this.userRepository.findOne({ id });
+    return user;
+  }
 }

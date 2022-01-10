@@ -1,3 +1,4 @@
+import { MyFriendEntity } from '../entitys/friend.entity';
 import { UserEntity } from '../entitys/user.entity';
 
 export const dbConfig = {
@@ -10,7 +11,7 @@ export const dbConfig = {
       ? process.env.DB_PASSWORD_PRO
       : process.env.DB_PASSWORD_DEV,
   database: process.env.DB_NAME,
-  entities: [UserEntity],
+  entities: [UserEntity,MyFriendEntity],
   synchronize: true,
   timezone: '+08:00',
   cache: {

@@ -1,6 +1,6 @@
 import { Column, Entity, BaseEntity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity({ name: 'user' })
+@Entity({ name: 'users' })
 export class UserEntity extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -16,7 +16,25 @@ export class UserEntity extends BaseEntity {
 
   @Column({
     type: 'varchar',
-    name: 'avatar',
+    name: 'face_image',
   })
   avatar: string;
+
+  @Column({
+    type: 'varchar',
+    name: 'face_image_big',
+  })
+  faceImageBig: string;
+
+  @Column({
+    type: 'varchar',
+    name: 'qrcode',
+  })
+  qrcode: string;
+
+  @Column({
+    type: 'varchar',
+    name: 'cid',
+  })
+  cid: string;
 }

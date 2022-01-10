@@ -8,5 +8,4 @@ export const avatarArr = [
   'https://cdn.acwing.com/media/user/profile/photo/13145_lg_a946a24e62.jpg',
   'https://cdn.acwing.com/media/user/profile/photo/4881_lg_e399d320a8.jpg',
   'https://cdn.acwing.com/media/user/profile/photo/5327_lg_124b5e2ab0.jpg',
-  'https://cdn.acwing.com/media/user/profile/photo/13021_lg_b4292b5ef8.jpg',
 ];

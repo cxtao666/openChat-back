@@ -878,12 +878,10 @@
   resolved "https://registry.nlark.com/@types/cors/download/@types/cors-2.8.12.tgz?cache=0&sync_timestamp=1629707095676&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40types%2Fcors%2Fdownload%2F%40types%2Fcors-2.8.12.tgz#6b2c510a7ad7039e98e7b8d3d6598f4359e5c080"
   integrity sha1-ayxRCnrXA56Y57jT1lmPQ1nlwIA=
 
-"@types/dotenv@^8.2.0":
-  version "8.2.0"
-  resolved "https://registry.nlark.com/@types/dotenv/download/@types/dotenv-8.2.0.tgz#5cd64710c3c98e82d9d15844375a33bf1b45d053"
-  integrity sha1-XNZHEMPJjoLZ0VhEN1ozvxtF0FM=
-  dependencies:
-    dotenv "*"
+"@types/crypto-js@^4.0.2":
+  version "4.0.2"
+  resolved "https://registry.npmmirror.com/@types/crypto-js/download/@types/crypto-js-4.0.2.tgz#4524325a175bf819fec6e42560c389ce1fb92c97"
+  integrity sha1-RSQyWhdb+Bn+xuQlYMOJzh+5LJc=
 
 "@types/eslint-scope@^3.7.0":
   version "3.7.1"
@@ -1964,6 +1962,11 @@ cookiejar@^2.1.2:
   resolved "https://registry.npmmirror.com/cookiejar/download/cookiejar-2.1.3.tgz?cache=0&sync_timestamp=1632881937184&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fcookiejar%2Fdownload%2Fcookiejar-2.1.3.tgz#fc7a6216e408e74414b90230050842dacda75acc"
   integrity sha1-/HpiFuQI50QUuQIwBQhC2s2nWsw=
 
+copy-to@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.nlark.com/copy-to/download/copy-to-2.0.1.tgz#2680fbb8068a48d08656b6098092bdafc906f4a5"
+  integrity sha1-JoD7uAaKSNCGVrYJgJK9r8kG9KU=
+
 core-util-is@~1.0.0:
   version "1.0.3"
   resolved "https://registry.nlark.com/core-util-is/download/core-util-is-1.0.3.tgz?cache=0&sync_timestamp=1630420577662&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fcore-util-is%2Fdownload%2Fcore-util-is-1.0.3.tgz#a6042d3634c2b27e9328f837b965fac83808db85"
@@ -2008,6 +2011,11 @@ cross-spawn@^7.0.0, cross-spawn@^7.0.1, cross-spawn@^7.0.2, cross-spawn@^7.0.3:
     path-key "^3.1.0"
     shebang-command "^2.0.0"
     which "^2.0.1"
+
+crypto-js@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.npmmirror.com/crypto-js/download/crypto-js-4.1.1.tgz#9e485bcf03521041bd85844786b83fb7619736cf"
+  integrity sha512-o2JlM7ydqd3Qk9CA0L4NL6mTzU2sdx96a+oOfPu8Mkl/PK51vSyoi8/rQ8NknZtk44vq15lmhAj9CIAGwgeWKw==
 
 cssom@^0.4.4:
   version "0.4.4"
@@ -2140,7 +2148,7 @@ dotenv-expand@5.1.0:
   resolved "https://registry.npm.taobao.org/dotenv-expand/download/dotenv-expand-5.1.0.tgz?cache=0&sync_timestamp=1603163578680&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fdotenv-expand%2Fdownload%2Fdotenv-expand-5.1.0.tgz#3fbaf020bfd794884072ea26b1e9791d45a629f0"
   integrity sha1-P7rwIL/XlIhAcuomsel5HUWmKfA=
 
-dotenv@*, dotenv@10.0.0, dotenv@^10.0.0:
+dotenv@10.0.0:
   version "10.0.0"
   resolved "https://registry.nlark.com/dotenv/download/dotenv-10.0.0.tgz?cache=0&sync_timestamp=1621627076012&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fdotenv%2Fdownload%2Fdotenv-10.0.0.tgz#3d4227b8fb95f81096cdd2b66653fb2c7085ba81"
   integrity sha1-PUInuPuV+BCWzdK2ZlP7LHCFuoE=
@@ -2234,7 +2242,7 @@ escalade@^3.1.1:
   resolved "https://registry.nlark.com/escalade/download/escalade-3.1.1.tgz#d8cfdc7000965c5a0174b4a82eaa5c0552742e40"
   integrity sha1-2M/ccACWXFoBdLSoLqpcBVJ0LkA=
 
-escape-html@~1.0.3:
+escape-html@^1.0.3, escape-html@~1.0.3:
   version "1.0.3"
   resolved "https://registry.nlark.com/escape-html/download/escape-html-1.0.3.tgz#0258eae4d3d0c0974de1c169188ef0051d1d1988"
   integrity sha1-Aljq5NPQwJdN4cFpGI7wBR0dGYg=
@@ -2491,6 +2499,13 @@ express@4.17.1:
     type-is "~1.6.18"
     utils-merge "1.0.1"
     vary "~1.1.2"
+
+extend-shallow@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.npm.taobao.org/extend-shallow/download/extend-shallow-2.0.1.tgz#51af7d614ad9a9f610ea1bafbb989d6b1c56890f"
+  integrity sha1-Ua99YUrZqfYQ6huvu5idaxxWiQ8=
+  dependencies:
+    is-extendable "^0.1.0"
 
 external-editor@^3.0.3:
   version "3.1.0"
@@ -3022,6 +3037,11 @@ is-core-module@^2.2.0:
   integrity sha1-PA730xtKz8V0+AxYQJ1WioNoSOM=
   dependencies:
     has "^1.0.3"
+
+is-extendable@^0.1.0:
+  version "0.1.1"
+  resolved "https://registry.nlark.com/is-extendable/download/is-extendable-0.1.1.tgz#62b110e289a471418e3ec36a617d472e301dfc89"
+  integrity sha1-YrEQ4omkcUGOPsNqYX1HLjAd/Ik=
 
 is-extglob@^2.1.1:
   version "2.1.1"
@@ -3871,7 +3891,7 @@ minimist@1.2.5, minimist@^1.2.0, minimist@^1.2.5:
   resolved "https://registry.nlark.com/minimist/download/minimist-1.2.5.tgz#67d66014b66a6a8aaa0c083c5fd58df4e4e97602"
   integrity sha1-Z9ZgFLZqaoqqDAg8X9WN9OTpdgI=
 
-mkdirp@^0.5.4:
+mkdirp@^0.5.1, mkdirp@^0.5.4:
   version "0.5.5"
   resolved "https://registry.nlark.com/mkdirp/download/mkdirp-0.5.5.tgz#d91cefd62d1436ca0f41620e251288d420099def"
   integrity sha1-2Rzv1i0UNsoPQWIOJRKI1CAJne8=
@@ -3927,7 +3947,7 @@ mysql@^2.18.1:
     safe-buffer "5.1.2"
     sqlstring "2.3.1"
 
-mz@^2.4.0:
+mz@^2.4.0, mz@^2.7.0:
   version "2.7.0"
   resolved "https://registry.nlark.com/mz/download/mz-2.7.0.tgz#95008057a56cafadc2bc63dde7f9ff6955948e32"
   integrity sha1-lQCAV6Vsr63CvGPd5/n/aVWUjjI=
@@ -5213,6 +5233,13 @@ typescript@^4.3.5:
   resolved "https://registry.npmmirror.com/typescript/download/typescript-4.4.3.tgz?cache=0&sync_timestamp=1633129620373&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Ftypescript%2Fdownload%2Ftypescript-4.4.3.tgz#bdc5407caa2b109efd4f82fe130656f977a29324"
   integrity sha1-vcVAfKorEJ79T4L+EwZW+XeikyQ=
 
+unescape@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.nlark.com/unescape/download/unescape-1.0.1.tgz#956e430f61cad8a4d57d82c518f5e6cc5d0dda96"
+  integrity sha1-lW5DD2HK2KTVfYLFGPXmzF0N2pY=
+  dependencies:
+    extend-shallow "^2.0.1"
+
 universalify@^0.1.2:
   version "0.1.2"
   resolved "https://registry.npm.taobao.org/universalify/download/universalify-0.1.2.tgz#b646f69be3942dabcecc9d6639c80dc105efaa66"
@@ -5239,6 +5266,17 @@ util-deprecate@^1.0.1, util-deprecate@~1.0.1:
   version "1.0.2"
   resolved "https://registry.npm.taobao.org/util-deprecate/download/util-deprecate-1.0.2.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Futil-deprecate%2Fdownload%2Futil-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
   integrity sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8=
+
+utility@^1.17.0:
+  version "1.17.0"
+  resolved "https://registry.npm.taobao.org/utility/download/utility-1.17.0.tgz?cache=0&sync_timestamp=1608038034531&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Futility%2Fdownload%2Futility-1.17.0.tgz#60819f712a6e0ce774f52fb1d691992a5f59d362"
+  integrity sha1-YIGfcSpuDOd09S+x1pGZKl9Z02I=
+  dependencies:
+    copy-to "^2.0.1"
+    escape-html "^1.0.3"
+    mkdirp "^0.5.1"
+    mz "^2.7.0"
+    unescape "^1.0.1"
 
 utils-merge@1.0.1:
   version "1.0.1"
