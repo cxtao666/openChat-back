@@ -6,11 +6,7 @@ interface resBody {
 export class ResPack {
   message: string;
   constructor(message) {
-    if (typeof message == 'object' && message !== null) {
-      this.message = JSON.stringify(message);
-    } else {
-      this.message = message;
-    }
+    this.message = message;
   }
   error(): resBody {
     return {

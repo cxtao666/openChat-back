@@ -2,8 +2,8 @@ import { Column, Entity, BaseEntity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'chat_msg' })
 export class ChatMsgEntity extends BaseEntity {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryGeneratedColumn({ name: 'id' })
+  id: number;
 
   @Column({ type: 'varchar', name: 'send_user_id' })
   userId: string;
@@ -18,13 +18,13 @@ export class ChatMsgEntity extends BaseEntity {
     type: 'int',
     name: 'sign_flag',
   })
-  isRead: number;
+  isRead: number | boolean;
 
   @Column({
     type: 'varchar',
     name: 'create_time',
   })
-  createTime: string;
+  createTime: string | number;
 
   @Column({
     type: 'varchar',
