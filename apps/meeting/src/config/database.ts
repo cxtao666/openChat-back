@@ -1,5 +1,9 @@
 import { ChatMsgEntity } from '../entitys/chatMsg.entity';
 import { MyFriendEntity } from '../entitys/friend.entity';
+import { MyGroupEntity } from '../entitys/group.entity';
+import { GroupMsgEntity } from '../entitys/groupMsg.entity';
+import { RoomEntity } from '../entitys/room.entity';
+import { RoomRequestEntity } from '../entitys/roomRequest';
 import { UserEntity } from '../entitys/user.entity';
 
 export const dbConfig = {
@@ -12,7 +16,15 @@ export const dbConfig = {
       ? process.env.DB_PASSWORD_PRO
       : process.env.DB_PASSWORD_DEV,
   database: process.env.DB_NAME,
-  entities: [UserEntity, MyFriendEntity, ChatMsgEntity],
+  entities: [
+    UserEntity,
+    MyFriendEntity,
+    ChatMsgEntity,
+    GroupMsgEntity,
+    MyGroupEntity,
+    RoomEntity,
+    RoomRequestEntity,
+  ],
   synchronize: true,
   timezone: '+08:00',
   cache: {

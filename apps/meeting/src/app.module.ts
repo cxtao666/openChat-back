@@ -7,6 +7,10 @@ import { DatabaseModule } from './modules/databse/database.module';
 import { FriendModule } from './modules/friend/friend.module';
 import { MsgModule } from './modules/msg/msg.module';
 import { FileModule } from './modules/file/file.module';
+import { GroupModule } from './modules/group/group.module';
+import { RoomModule } from './modules/room/room.module';
+import { GroupMsgModule } from './modules/groupMsg/groupMsg.module';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
@@ -24,6 +28,10 @@ import { FileModule } from './modules/file/file.module';
     FriendModule,
     MsgModule,
     FileModule,
+    GroupModule,
+    RoomModule,
+    GroupMsgModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

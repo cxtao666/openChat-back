@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { MessageData } from 'apps/meeting-chat/src/modules/ws/ws.gateway';
-import { Repository } from 'typeorm';
+import { LessThanOrEqual, Repository } from 'typeorm';
 import { timeStampToString } from '../../common/time';
 import { ChatMsgEntity } from '../../entitys/chatMsg.entity';
 import { FriendMsgeReq } from './msg.controller';
@@ -12,8 +12,28 @@ export class MsgService {
     private readonly chatMsgRepository: Repository<ChatMsgEntity>,
   ) {}
   //拉取聊天记录，注意从哪个消息id开始拉信息
-  async pullFriendMessage({ id, targetId, take = 5, skip = 0 }: FriendMsgeReq) {
-    console.log(id, targetId, take, skip);
+  async pullFriendMessage({
+    id,
+    targetId,
+    take = 5,
+    skip = 0,
+    startId,
+  }: FriendMsgeReq) {
+    console.log(id, targetId, take, skip, startId);
+
+    if (startId && startId > 0) {
+      return await this.chatMsgRepository.find({
+        where: [
+          { userId: id, targetUserId: targetId, id: LessThanOrEqual(startId) },
+          { userId: targetId, targetUserId: id, id: LessThanOrEqual(startId) },
+        ],
+        skip: skip * take,
+        take,
+        order: {
+          id: 'DESC',
+        },
+      });
+    }
     return await this.chatMsgRepository.find({
       where: [
         { userId: id, targetUserId: targetId },
@@ -40,6 +60,7 @@ export class MsgService {
       targetId,
       take: 10,
       skip: 0,
+      startId: 0,
     });
   }
 

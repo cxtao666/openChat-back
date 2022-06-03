@@ -7,6 +7,7 @@ export interface FriendMsgeReq {
   targetId: string;
   skip: number;
   take: number;
+  startId: number;
 }
 
 export interface MsgCenter {

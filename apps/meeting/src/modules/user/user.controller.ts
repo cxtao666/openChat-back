@@ -2,6 +2,7 @@ import { Controller, Post, Body } from '@nestjs/common';
 import { generatePhoto } from '../../common/generatePhoto';
 import { UserService } from './user.service';
 import { ResPack } from '../../common/resPack';
+import { AuthService } from '../auth/auth.service';
 
 interface loginBody {
   username: string;
@@ -23,7 +24,10 @@ interface resBody {
 
 @Controller('/api/user')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    private readonly authService: AuthService,
+  ) {}
 
   @Post('login')
   async login(@Body() data: loginBody): Promise<resBody> {
@@ -41,7 +45,11 @@ export class UserController {
       if (user.password !== data.password) {
         return new ResPack('密码错误').error();
       }
-      return new ResPack(user).success();
+      const jwtInfo = await this.authService.certificate(user);
+      return new ResPack({
+        message: user,
+        token: jwtInfo.data?.token,
+      }).success();
     }
   }
 
