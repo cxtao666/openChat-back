@@ -20,6 +20,7 @@ import { AuthModule } from './modules/auth/auth.module';
         transport: Transport.TCP,
         options: {
           port: 4000,
+          host: 'nest-service',
         },
       },
     ]),

@@ -4,6 +4,6 @@ WORKDIR /home/node
 COPY . /home/node
 RUN yarn config set registry https://registry.npm.taobao.org/
 RUN yarn install
-RUN npx nest build meeting
-CMD node ./dist/apps/meeting/main.js
-EXPOSE 3000
+RUN npx nest build nest-service
+CMD node ./dist/apps/nest-service/main.js
+EXPOSE 4000
