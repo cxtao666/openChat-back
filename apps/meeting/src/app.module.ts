@@ -11,6 +11,7 @@ import { GroupModule } from './modules/group/group.module';
 import { RoomModule } from './modules/room/room.module';
 import { GroupMsgModule } from './modules/groupMsg/groupMsg.module';
 import { AuthModule } from './modules/auth/auth.module';
+const isProd = process.env.NODE_ENV === 'production';
 
 @Module({
   imports: [
@@ -20,7 +21,7 @@ import { AuthModule } from './modules/auth/auth.module';
         transport: Transport.TCP,
         options: {
           port: 4000,
-          host: 'nest-service',
+          host: isProd ? 'nest-service' : 'localhost',
         },
       },
     ]),
@@ -37,4 +38,4 @@ import { AuthModule } from './modules/auth/auth.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

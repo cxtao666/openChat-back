@@ -7,6 +7,6 @@ export class AppController {
 
   @Get('/')
   async sayHello() {
-    return '蔡贤涛';
+    return await this.appService.getHello();
   }
 }
