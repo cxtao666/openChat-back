@@ -3,7 +3,12 @@ import { generatePhoto } from '../../common/generatePhoto';
 import { UserService } from './user.service';
 import { ResPack } from '../../common/resPack';
 import { AuthService } from '../auth/auth.service';
-import { ApiOperation, ApiResponse } from '@nestjs/swagger';
+import {
+  ApiBody,
+  ApiOperation,
+  ApiProperty,
+  ApiResponse,
+} from '@nestjs/swagger';
 
 interface loginBody {
   username: string;
@@ -23,6 +28,26 @@ interface resBody {
   status: string;
 }
 
+class LoginDto {
+  @ApiProperty({ name: 'username' })
+  username: string; //手机号码
+  @ApiProperty({ name: 'password' })
+  password: string; // 密码
+  @ApiProperty({ name: 'nickname' })
+  nickname: string; // 昵称
+  @ApiProperty({ name: 'avatar' })
+  avatar: string; // 头像
+  @ApiProperty({ name: 'id' })
+  id: string; // id
+}
+
+class LoginVo {
+  @ApiProperty({ name: 'message' })
+  message: string;
+  @ApiProperty({ name: 'status' })
+  status: string;
+}
+
 @Controller('/api/user')
 export class UserController {
   constructor(
@@ -34,7 +59,10 @@ export class UserController {
   @ApiResponse({
     status: HttpStatus.OK,
     description: '登录成功',
-    type: String,
+    type: LoginVo,
+  })
+  @ApiBody({
+    type: LoginDto,
   })
   @Post('login')
   async login(@Body() data: loginBody): Promise<resBody> {
