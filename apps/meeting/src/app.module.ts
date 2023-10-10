@@ -11,6 +11,7 @@ import { GroupModule } from './modules/group/group.module';
 import { RoomModule } from './modules/room/room.module';
 import { GroupMsgModule } from './modules/groupMsg/groupMsg.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { join } from 'path';
 const isProd = process.env.NODE_ENV === 'production';
 
 @Module({
@@ -18,10 +19,11 @@ const isProd = process.env.NODE_ENV === 'production';
     ClientsModule.register([
       {
         name: 'NEST_SERVICE',
-        transport: Transport.TCP,
+        transport: Transport.GRPC,
         options: {
-          port: 4000,
-          host: isProd ? 'nest-service' : 'localhost',
+          url: `${isProd ? 'nest-service' : 'localhost'}:4000`,
+          package: 'book',
+          protoPath: join(__dirname, 'book/book.proto'),
         },
       },
     ]),
@@ -38,4 +40,4 @@ const isProd = process.env.NODE_ENV === 'production';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}

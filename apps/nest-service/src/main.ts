@@ -1,16 +1,18 @@
 import { NestFactory } from '@nestjs/core';
-import { MicroserviceOptions, Transport } from '@nestjs/microservices';
+import { Transport, GrpcOptions } from '@nestjs/microservices';
 import { NestServiceModule } from './nest-service.module';
+import { join } from 'path';
 
 // host 要写0.0.0.0，不然容器端口无法暴露出去访问，很坑
 async function bootstrap() {
-  const app = await NestFactory.createMicroservice<MicroserviceOptions>(
+  const app = await NestFactory.createMicroservice<GrpcOptions>(
     NestServiceModule,
     {
-      transport: Transport.TCP,
+      transport: Transport.GRPC,
       options: {
-        host: '0.0.0.0',
-        port: 4000,
+        url: '0.0.0.0:4000',
+        package: 'book',
+        protoPath: join(__dirname, 'book/book.proto'),
       },
     },
   );
