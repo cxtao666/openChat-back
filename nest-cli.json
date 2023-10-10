@@ -5,7 +5,11 @@
   "root": "apps/meeting",
   "compilerOptions": {
     "webpack": true,
-    "tsConfigPath": "apps/meeting/tsconfig.app.json"
+    "tsConfigPath": "apps/meeting/tsconfig.app.json",
+    "assets": [
+      "**/*.proto"
+    ],
+    "watchAssets": true
   },
   "projects": {
     "meeting": {
@@ -14,11 +18,7 @@
       "entryFile": "main",
       "sourceRoot": "apps/meeting/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/meeting/tsconfig.app.json",
-        "assets": [
-          "**/*.proto"
-        ],
-        "watchAssets": true
+        "tsConfigPath": "apps/meeting/tsconfig.app.json"
       }
     },
     "nest-service": {
@@ -27,11 +27,7 @@
       "entryFile": "main",
       "sourceRoot": "apps/nest-service/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/nest-service/tsconfig.app.json",
-        "assets": [
-          "**/*.proto"
-        ],
-        "watchAssets": true
+        "tsConfigPath": "apps/nest-service/tsconfig.app.json"
       }
     },
     "meeting-chat": {
@@ -40,11 +36,7 @@
       "entryFile": "main",
       "sourceRoot": "apps/meeting-chat/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/meeting-chat/tsconfig.app.json",
-        "assets": [
-          "**/*.proto"
-        ],
-        "watchAssets": true
+        "tsConfigPath": "apps/meeting-chat/tsconfig.app.json"
       }
     }
   }

@@ -1,8 +1,9 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, HttpStatus } from '@nestjs/common';
 import { generatePhoto } from '../../common/generatePhoto';
 import { UserService } from './user.service';
 import { ResPack } from '../../common/resPack';
 import { AuthService } from '../auth/auth.service';
+import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 
 interface loginBody {
   username: string;
@@ -29,6 +30,12 @@ export class UserController {
     private readonly authService: AuthService,
   ) {}
 
+  @ApiOperation({ summary: '登录', description: '用户登录' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: '登录成功',
+    type: String,
+  })
   @Post('login')
   async login(@Body() data: loginBody): Promise<resBody> {
     if (
