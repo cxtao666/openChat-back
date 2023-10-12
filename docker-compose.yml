@@ -1,11 +1,11 @@
 version: '3'
 services:
   meeting:
-    image: meeting  #镜像
-    container_name: meeting-app  #容器名称  
+    image: meeting #镜像
+    container_name: meeting-app #容器名称  
     build:
       context: .
-      dockerfile: ./build/meeting-app.Dockerfile 
+      dockerfile: ./build/meeting-app.Dockerfile
     environment:
       NODE_ENV: 'production'
     ports:
@@ -13,8 +13,8 @@ services:
     networks:
       - common-network
   meeting-chat:
-    image: meeting-chat  #镜像
-    container_name: meeting-chat  #容器名称  
+    image: meeting-chat #镜像
+    container_name: meeting-chat #容器名称  
     build:
       context: .
       dockerfile: ./build/meeting-chat.Dockerfile
@@ -23,15 +23,127 @@ services:
     networks:
       - common-network
   nest-service:
-    image: nest-service  #镜像
-    container_name: nest-service  #容器名称  
+    image: nest-service #镜像
+    container_name: nest-service #容器名称  
     build:
       context: .
-      dockerfile: ./build/nest-service.Dockerfile 
+      dockerfile: ./build/nest-service.Dockerfile
     environment:
       NODE_ENV: 'production'
     networks:
       - common-network
+  rabbitmq:
+    image: rabbitmq:3.9.13-management
+    # 容器名
+    container_name: rabbitmq
+    # 是否支持重启
+    restart: always
+    hostname: rabbitmq
+    ports:
+      - 15672:15672
+    # 容器卷
+    volumes:
+      - ./data/rabbitmq:/var/lib/rabbitmq
+  redis:
+    #redis服务/其他服务（web服务/nginx服务等）
+    image: redis:7 #redis镜像，如果镜像容器没有会去自动拉取
+    container_name: redis #设置容器名称
+    command: redis-server --appendonly yes --requirepass '123456' #开启持久化的支持并设置认证密码
+    restart: always #跟随docker的启动而启动
+    volumes:
+      - ./data/redis:/data #数据文件挂载
+    ports:
+      - 6379:6379
+  elasticsearch:
+    image: elasticsearch:7.17.4
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - ./data/es/plugins:/usr/share/elasticsearch/plugins #插件文件挂载
+      - ./data/es/data:/usr/share/elasticsearch/data #数据文件挂载
+    ports:
+      - '9200:9200'
+      - '9300:9300'
+    container_name: elasticsearch
+    restart: always
+    environment:
+      - 'cluster.name=elasticsearch' #设置集群名称为elasticsearch
+      - 'discovery.type=single-node' #以单一节点模式启动
+      - 'ES_JAVA_OPTS=-Xms1024m -Xmx1024m' #设置使用jvm内存大小
+    networks:
+      - common-network
+  logstash:
+    image: logstash:7.17.4
+    container_name: logstash
+    restart: always
+    ports:
+      - '5044:5044'
+      - '50000:50000/tcp'
+      - '50000:50000/udp'
+      - '9600:9600'
+    environment:
+      LS_JAVA_OPTS: -Xms1024m -Xmx1024m
+      TZ: Asia/Shanghai
+      MONITORING_ENABLED: false
+    links:
+      - elasticsearch:es #可以用es这个域名访问elasticsearch服务
+    networks:
+      - common-network
+    depends_on:
+      - elasticsearch
+  kibana:
+    image: kibana:7.17.4
+    container_name: kibana
+    restart: always
+    ports:
+      - '5601:5601'
+    links:
+      - elasticsearch:es #可以用es这个域名访问elasticsearch服务
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200 #设置访问elasticsearch的地址
+      - 'elasticsearch.hosts=http://es:9200' #设置访问elasticsearch的地址
+      - I18N_LOCALE=zh-CN
+    networks:
+      - common-network
+    depends_on:
+      - elasticsearch
+  nginx:
+    image: nginx:stable-alpine
+    container_name: nginx
+    restart: always
+  zipkin:
+    image: openzipkin/zipkin:2.21
+    container_name: zipkin
+    depends_on:
+      - elasticsearch
+    links:
+      - elasticsearch
+    restart: always
+    ports:
+      - 9411:9411
+    environment:
+      - TZ=Asia/Shanghai
+      - STORAGE_TYPE=elasticsearch
+      - ES_HOSTS=elasticsearch:9200
+  docker-etcd:
+    hostname: etcd
+    image: bitnami/etcd:3.5.5
+    volumes:
+      - "./data/etcd/data:/bitnami/etcd/data"
+    environment:
+      - ALLOW_NONE_AUTHENTICATION=yes
+      - ETCD_ADVERTISE_CLIENT_URLS=http://0.0.0.0:2379
+    ports:
+      - "2379:2379"
+      - "2380:2380"
+    networks:
+      - common-network
+  docker-etcdkeeper:
+    hostname: etcdkeeper
+    image: evildecay/etcdkeeper:v0.7.6
+    ports:
+      - "8099:8080"
+    networks:
+      - common-network
 networks:
   common-network:
-    external: true 
+    external: true
