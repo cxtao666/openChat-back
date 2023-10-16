@@ -12,6 +12,10 @@ import { RoomModule } from './modules/room/room.module';
 import { GroupMsgModule } from './modules/groupMsg/groupMsg.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { join } from 'path';
+import { EtcdModule } from './modules/etcd/etcd.module';
+import { RedisModule } from './modules/redis/redis.module';
+import { RabbitMQModule } from './modules/rabbitmq/rabbitmq.module';
+import { ElasticsearchModule } from './modules/es/es.module';
 const isProd = process.env.NODE_ENV === 'production';
 
 @Module({
@@ -36,6 +40,10 @@ const isProd = process.env.NODE_ENV === 'production';
     RoomModule,
     GroupMsgModule,
     AuthModule,
+    EtcdModule,
+    RedisModule,
+    RabbitMQModule,
+    ElasticsearchModule,
   ],
   controllers: [AppController],
   providers: [AppService],

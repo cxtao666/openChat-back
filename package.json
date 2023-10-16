@@ -22,6 +22,7 @@
     "doc": "compodoc -p tsconfig.json"
   },
   "dependencies": {
+    "@elastic/elasticsearch": "^8.10.0",
     "@grpc/grpc-js": "^1.9.5",
     "@grpc/proto-loader": "^0.7.10",
     "@nestjs/common": "^8.0.0",
@@ -38,8 +39,11 @@
     "@nestjs/websockets": "^8.0.11",
     "@types/crypto-js": "^4.0.2",
     "@types/ws": "^8.2.0",
+    "amqplib": "^0.10.3",
     "cross-env": "^7.0.3",
     "crypto-js": "^4.1.1",
+    "etcd3": "^1.1.2",
+    "ioredis": "^5.3.2",
     "mysql": "^2.18.1",
     "node-uuid": "^1.4.8",
     "passport": "^0.5.2",
@@ -49,7 +53,10 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
-    "typeorm": "^0.2.38"
+    "typeorm": "^0.2.38",
+    "winston": "^3.11.0",
+    "winston-logstash-transport": "^2.0.0",
+    "zipkin": "^0.22.0"
   },
   "devDependencies": {
     "@compodoc/compodoc": "^1.1.21",
