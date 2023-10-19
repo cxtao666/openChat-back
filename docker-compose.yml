@@ -144,6 +144,14 @@ services:
       - "8099:8080"
     networks:
       - common-network
+  postgres: 
+    image: postgres
+    container_name: my-postgres
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: 1a3b3c4d2e!ABC
+      POSTGRES_DB: meeting
+
 networks:
   common-network:
     external: true

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ZipkinProvider } from './zipkin.providers';
 
 @Injectable()
-export class MyService {
+export class ZipkinService {
   constructor(private zipkinProvider: ZipkinProvider) {}
 
   someMethod() {
