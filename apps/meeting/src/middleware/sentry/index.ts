@@ -10,11 +10,5 @@ export class SentryMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: NextFunction) {
     // 使用Sentry捕获异常
     this.sentry.getSentry().Handlers.requestHandler()(req, res, next);
-    this.sentry.getSentry().Handlers.errorHandler()(
-      new Error(''),
-      req,
-      res,
-      next,
-    );
   }
 }
