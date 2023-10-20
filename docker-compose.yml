@@ -44,16 +44,8 @@ services:
     # 容器卷
     volumes:
       - ./data/rabbitmq:/var/lib/rabbitmq
-  redis:
-    #redis服务/其他服务（web服务/nginx服务等）
-    image: redis:7 #redis镜像，如果镜像容器没有会去自动拉取
-    container_name: redis #设置容器名称
-    command: redis-server --appendonly yes --requirepass '123456' #开启持久化的支持并设置认证密码
-    restart: always #跟随docker的启动而启动
-    volumes:
-      - ./data/redis:/data #数据文件挂载
-    ports:
-      - 6379:6379
+    networks:
+      - common-network
   elasticsearch:
     image: elasticsearch:7.17.4
     volumes:
@@ -110,6 +102,8 @@ services:
     image: nginx:stable-alpine
     container_name: nginx
     restart: always
+    networks:
+      - common-network
   zipkin:
     image: openzipkin/zipkin:2.21
     container_name: zipkin
@@ -124,6 +118,8 @@ services:
       - TZ=Asia/Shanghai
       - STORAGE_TYPE=elasticsearch
       - ES_HOSTS=elasticsearch:9200
+    networks:
+      - common-network
   docker-etcd:
     hostname: etcd
     image: bitnami/etcd:3.5.5
@@ -151,7 +147,57 @@ services:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: 1a3b3c4d2e!ABC
       POSTGRES_DB: meeting
-
+    networks:
+      - common-network
+  redis-master:
+    image: 'redis:7'
+    environment:
+      - REDIS_REPLICATION_MODE=master
+      - REDIS_PASSWORD=""
+    networks:
+      - common-network
+    ports:
+      - '6379:6379'
+  redis-slave1:
+    image: 'redis:7'
+    environment:
+      - REDIS_REPLICATION_MODE=slave
+      - REDIS_MASTER_HOST=redis
+      - REDIS_MASTER_PASSWORD=""
+      - REDIS_PASSWORD=""
+    ports:
+      - '6381:6379'
+    depends_on:
+      - redis-master
+    networks:
+      - common-network
+  redis-slave2:
+    image: 'redis:7'
+    environment:
+      - REDIS_REPLICATION_MODE=slave
+      - REDIS_MASTER_HOST=redis
+      - REDIS_MASTER_PASSWORD=""
+      - REDIS_PASSWORD=""
+    ports:
+      - '6382:6379'
+    depends_on:
+      - redis-master
+    networks:
+      - common-network  
+  redis-sentinel:
+    build:
+      context: ./build/sentinel
+      dockerfile: ./redis-sentinel.Dockerfile
+    environment:
+      - REDIS_MASTER_PASSWORD=""
+    depends_on:
+      - redis-master
+      - redis-slave1
+      - redis-slave2
+    ports:
+      - '26379:26379'
+    networks:
+      - common-network
 networks:
   common-network:
     external: true

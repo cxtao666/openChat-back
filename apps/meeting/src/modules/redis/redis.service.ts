@@ -7,8 +7,8 @@ export class RedisService {
 
   constructor() {
     this.client = new Redis({
-      host: 'redis', // Redis服务器的地址
-      port: 6379, // Redis服务器的端口
+      host: 'redis-sentinel', // Redis服务器的地址
+      port: 26379, // Redis服务器的端口
     });
   }
 

@@ -6,7 +6,7 @@ export class ElasticsearchService {
   private client: Client;
 
   constructor() {
-    this.client = new Client({ node: 'elasticsearch:9200' }); // Elasticsearch服务器地址
+    this.client = new Client({ node: 'http://elasticsearch:9200' }); // Elasticsearch服务器地址
   }
 
   async indexDocument(index: string, document: any) {

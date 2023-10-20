@@ -1,9 +1,7 @@
 import { Injectable, Scope } from '@nestjs/common';
 import * as zipkin from 'zipkin';
 
-@Injectable({
-  scope: Scope.DEFAULT,
-})
+@Injectable()
 export class ZipkinProvider {
   getTracer(): zipkin.Tracer {
     const recorder = new zipkin.ConsoleRecorder();

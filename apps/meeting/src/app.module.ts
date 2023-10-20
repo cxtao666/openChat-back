@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { AppService } from './app.service';
@@ -16,6 +16,10 @@ import { EtcdModule } from './modules/etcd/etcd.module';
 import { RedisModule } from './modules/redis/redis.module';
 import { RabbitMQModule } from './modules/rabbitmq/rabbitmq.module';
 import { ElasticsearchModule } from './modules/es/es.module';
+import { ZipkinMiddleware } from './middleware/zipkin';
+import { SentryMiddleware } from './middleware/sentry';
+import { SentryModule } from './middleware/sentry/sentry.module';
+import { ZipkinModule } from './middleware/zipkin/zipkin.module';
 const isProd = process.env.NODE_ENV === 'production';
 
 @Module({
@@ -31,6 +35,8 @@ const isProd = process.env.NODE_ENV === 'production';
         },
       },
     ]),
+    SentryModule,
+    ZipkinModule,
     DatabaseModule,
     UserModule,
     FriendModule,
@@ -48,4 +54,9 @@ const isProd = process.env.NODE_ENV === 'production';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(ZipkinMiddleware).forRoutes('*');
+    consumer.apply(SentryMiddleware).forRoutes('*');
+  }
+}
