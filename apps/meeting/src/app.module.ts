@@ -20,6 +20,7 @@ import { ZipkinMiddleware } from './middleware/zipkin';
 import { SentryMiddleware } from './middleware/sentry';
 import { SentryModule } from './middleware/sentry/sentry.module';
 import { ZipkinModule } from './middleware/zipkin/zipkin.module';
+import { CustomLogModule } from './modules/log/log.module';
 const isProd = process.env.NODE_ENV === 'production';
 
 @Module({
@@ -50,6 +51,7 @@ const isProd = process.env.NODE_ENV === 'production';
     RedisModule,
     RabbitMQModule,
     ElasticsearchModule,
+    CustomLogModule,
   ],
   controllers: [AppController],
   providers: [AppService],
