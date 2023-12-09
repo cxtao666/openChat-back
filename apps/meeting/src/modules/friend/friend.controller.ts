@@ -1,6 +1,6 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { FriendService } from './friend.service';
-import { ResPack } from '../../common/resPack';
+import { ResPack } from '@app/common/index';
 import { UserService } from '../user/user.service';
 import { MsgService } from '../msg/msg.service';
 

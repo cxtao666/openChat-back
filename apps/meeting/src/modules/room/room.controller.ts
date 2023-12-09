@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
-import { ResPack } from '../../common/resPack';
+import { ResPack } from '@app/common/index';
 import { GroupService } from '../group/group.service';
 import { RoomService } from './room.service';
 

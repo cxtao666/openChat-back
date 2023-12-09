@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import { timeStampToString } from '../../common/time';
-import { RoomEntity } from '../../entitys/room.entity';
+import { timeStampToString } from '@app/common/index';
+import { RoomEntity } from '@app/common/index';
 import { RoomReq } from './room.controller';
 
 @Injectable()

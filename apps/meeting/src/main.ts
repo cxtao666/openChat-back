@@ -1,5 +1,5 @@
 import { NestFactory } from '@nestjs/core';
-import { readEnv } from './common/readEnv';
+import { readEnv } from '../../../libs/common/src/common/readEnv';
 readEnv(); //将环境变量挂载到进程的env中
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';

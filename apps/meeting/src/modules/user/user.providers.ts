@@ -1,5 +1,5 @@
 import { Connection } from 'typeorm';
-import { UserEntity } from '../../entitys/user.entity';
+import { UserEntity } from '@app/common/index';
 
 export const UserProviders = [
   {

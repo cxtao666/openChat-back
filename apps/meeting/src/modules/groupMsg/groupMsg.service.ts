@@ -1,8 +1,8 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import { GroupMsgEntity } from '../../entitys/groupMsg.entity';
+import { GroupMsgEntity } from '@app/common/index';
 import { MessageData } from 'apps/meeting-chat/src/modules/ws/ws.gateway';
-import { timeStampToString } from '../../common/time';
+import { timeStampToString } from '@app/common/index';
 
 @Injectable()
 export class GroupMsgService {

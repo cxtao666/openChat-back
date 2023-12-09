@@ -1,17 +1,17 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "declaration": false,
-    "outDir": "../../dist/apps/nest-service"
+    "declaration": true,
+    "outDir": "../../dist/libs/common"
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist", "test", "**/*spec.ts"],
   "paths": {
-    "@app/common": [
-      "../../libs/common/src"
+    "@app/meeting": [
+      "../../apps/meeting/src"
     ],
-    "@app/common/*": [
-      "../../libs/common/src/*"
+    "@app/meeting/*": [
+      "../../apps/meeting/src/*"
     ]
   }
 }

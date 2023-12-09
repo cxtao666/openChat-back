@@ -1,5 +1,5 @@
 import { Connection } from 'typeorm';
-import { RoomEntity } from '../../entitys/room.entity';
+import { RoomEntity } from '@app/common/index';
 
 export const RoomProviders = [
   {

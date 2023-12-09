@@ -1,5 +1,5 @@
 import { Connection } from 'typeorm';
-import { GroupMsgEntity } from '../../entitys/groupMsg.entity';
+import { GroupMsgEntity } from '@app/common/index';
 
 export const GroupMsgProviders = [
   {

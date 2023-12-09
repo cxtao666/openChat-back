@@ -1,6 +1,6 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { MsgService } from './msg.service';
-import { ResPack } from '../../common/resPack';
+import { ResPack } from '@app/common/index';
 
 export interface FriendMsgeReq {
   id: string;

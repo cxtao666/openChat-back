@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { DatabaseModule } from '../databse/database.module';
+import { DatabaseModule } from '@app/common/index';
 import { MsgController } from './msg.controller';
 import { MsgProviders } from './msg.providers';
 import { MsgService } from './msg.service';

@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { DatabaseModule } from '../databse/database.module';
+import { DatabaseModule } from '@app/common/index';
 import { GroupModule } from '../group/group.module';
 import { RoomController } from './room.controller';
 import { RoomProviders } from './room.providers';

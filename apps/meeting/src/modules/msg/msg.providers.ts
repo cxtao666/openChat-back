@@ -1,5 +1,5 @@
 import { Connection } from 'typeorm';
-import { ChatMsgEntity } from '../../entitys/chatMsg.entity';
+import { ChatMsgEntity } from '@app/common/index';
 
 export const MsgProviders = [
   {

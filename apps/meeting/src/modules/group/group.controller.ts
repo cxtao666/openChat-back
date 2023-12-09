@@ -1,6 +1,5 @@
 import { Body, Controller, Post, Get, Query } from '@nestjs/common';
-import { query } from 'express';
-import { ResPack } from '../../common/resPack';
+import { ResPack } from '@app/common/index';
 import { GroupService } from './group.service';
 
 export interface GroupReq {

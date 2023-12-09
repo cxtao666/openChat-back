@@ -1,8 +1,8 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { MessageData } from 'apps/meeting-chat/src/modules/ws/ws.gateway';
 import { LessThanOrEqual, Repository } from 'typeorm';
-import { timeStampToString } from '../../common/time';
-import { ChatMsgEntity } from '../../entitys/chatMsg.entity';
+import { timeStampToString } from '@app/common/index';
+import { ChatMsgEntity } from '@app/common/index';
 import { FriendMsgeReq } from './msg.controller';
 
 @Injectable()

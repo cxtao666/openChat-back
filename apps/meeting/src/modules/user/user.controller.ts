@@ -1,8 +1,8 @@
 import { Controller, Post, Body, HttpStatus } from '@nestjs/common';
-import { generatePhoto } from '../../common/generatePhoto';
+import { generatePhoto } from '@app/common/index';
 import { UserService } from './user.service';
-import { ResPack } from '../../common/resPack';
-import { AuthService } from '../auth/auth.service';
+import { ResPack } from '@app/common/index';
+import { AuthService } from '@app/common/index';
 import {
   ApiBody,
   ApiOperation,

@@ -1,11 +1,11 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { LessThanOrEqual, Repository } from 'typeorm';
-import { timeStampToString } from '../../common/time';
-import { MyGroupEntity } from '../../entitys/group.entity';
-import { GroupMsgEntity } from '../../entitys/groupMsg.entity';
-import { RoomEntity } from '../../entitys/room.entity';
-import { RoomRequestEntity } from '../../entitys/roomRequest';
-import { UserEntity } from '../../entitys/user.entity';
+import { timeStampToString } from '@app/common/index';
+import { MyGroupEntity } from '@app/common/index';
+import { GroupMsgEntity } from '@app/common/index';
+import { RoomEntity } from '@app/common/index';
+import { RoomRequestEntity } from '@app/common/index';
+import { UserEntity } from '@app/common/index';
 import { GroupReq } from './group.controller';
 
 @Injectable()
