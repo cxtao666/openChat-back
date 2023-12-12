@@ -142,15 +142,6 @@ services:
       - "8099:8080"
     networks:
       - common-network
-  postgres: 
-    image: postgres
-    container_name: my-postgres
-    environment:
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: 1a3b3c4d2e!ABC
-      POSTGRES_DB: meeting
-    networks:
-      - common-network
   redis-master:
     image: 'redis:7'
     environment:
@@ -185,7 +176,7 @@ services:
     depends_on:
       - redis-master
     networks:
-      - common-network  
+      - common-network
   redis-sentinel:
     build:
       context: ./build/sentinel
@@ -198,6 +189,143 @@ services:
       - redis-slave2
     ports:
       - '26379:26379'
+    networks:
+      - common-network
+  kong-database:
+    image: postgres:9.6
+    restart: always  #每次总是启动
+    networks: 
+      - common-network
+    environment:
+      POSTGRES_USER: kong
+      POSTGRES_DB: kong
+      POSTGRES_PASSWORD: kong
+    ports:
+      - "5432:5432"
+  kong-migration:
+    image: kong:latest
+    command: "kong migrations bootstrap"
+    networks: 
+      - common-network
+    restart: on-failure
+    environment:
+      - KONG_DATABASE=postgres
+      - KONG_PG_DATABASE=kong
+      - KONG_PG_PASSWORD=kong
+      - KONG_PG_HOST=kong-database
+    links: 
+      - kong-database #连接的是kong-database服务的
+    depends_on:
+      - kong-database #依赖于kong-database服务
+  kong:
+    image: kong:latest
+    restart: always
+    networks:
+      - common-network
+    environment:
+      KONG_DATABASE: postgres
+      KONG_PG_HOST: kong-database
+      KONG_PG_PASSWORD: kong
+      KONG_PROXY_LISTEN: 0.0.0.0:8000
+      KONG_PROXY_LISTEN_SSL: 0.0.0.0:8443
+      KONG_ADMIN_LISTEN: 0.0.0.0:8001
+    depends_on:
+      - kong-migration
+    links: 
+      - kong-database
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://kong:8001"]
+      interval: 5s
+      timeout: 2s
+      retries: 15
+    ports:
+      - "8001:8001"
+      - "8000:8000"
+      - "8443:8443"
+  konga-prepare:
+    image: pantsel/konga:latest
+    command: "-c prepare -a postgres -u postgresql://kong:kong@kong-database:5432/konga"  #注意是用户名：密码@数据库服务名称：端口
+    networks:
+      - common-network
+    restart: on-failure
+    links:
+      - kong-database
+    depends_on:
+      - kong        #依赖kong服务
+      - kong-database #依赖kong-database服务
+  konga:
+    image: pantsel/konga:latest
+    restart: always
+    networks:
+      - common-network
+    environment:
+      DB_ADAPTER: postgres
+      DB_HOST: kong-database
+      DB_USER: kong
+      DB_DATABASE: konga
+      DB_PASSWORD: kong #必须加上密码，不然会失败
+    depends_on:
+      - kong
+      - kong-database
+    ports:
+      - "1337:1337"
+  nacos:
+    restart: always
+    image: zhusaidong/nacos-server-m1:2.0.3
+    # 容器名称
+    container_name: nacos
+    # 端口映射
+    ports:
+      - 8848:8848
+    # 容器权限
+    privileged: true
+    # 参数设置
+    environment:
+      JVM_XMS: 128m
+      JVM_XMX: 128m
+      JVM_MS: 64m
+      JVM_MMS: 64m
+      MODE: standalone
+      NACOS_REPLICAS: 1
+      PREFER_HOST_MODE: ip
+    volumes:
+      - ./data/nacos/logs:/home/nacos/logs
+      - ./data/nacos/plugins:/home/nacos/plugins
+      - ./data/nacos/data:/home/nacos/data
+    networks:
+      - common-network
+  consul:
+    image: consul:1.15.4
+    container_name: consul
+    restart: always
+    volumes:
+      - .data/consul/config:/consul/config
+      - ./data/consul/data:/consul/data
+      - ./data/consul/logs:/consul/logs
+    command:  consul agent -server -bootstrap-expect=1 -client=0.0.0.0 -ui -bind='{{ GetPrivateIP }}' -data-dir=/consul/data -node=consul-node -datacenter=dc1 -log-level=debug -enable-script-checks=true -config-dir=/consul/config
+    ports:
+      - "8500:8500"
+      - "8600:8600/udp"
+    networks:
+      - common-network
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    ports:
+      - 9090:9090
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+    volumes:
+      - ./data/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    networks:
+      - common-network
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "6030:3000"
+    container_name: grafana
+    depends_on:
+      - prometheus
     networks:
       - common-network
 networks:
