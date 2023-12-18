@@ -1,0 +1,39 @@
+version: '3'
+services:
+  meeting:
+    image: meeting #镜像
+    container_name: meeting-app #容器名称  
+    build:
+      context: .
+      dockerfile: ./build/meeting-app.Dockerfile
+    environment:
+      NODE_ENV: 'production'
+    ports:
+      - '3000:3000'
+    networks:
+      - common-network
+  meeting-chat:
+    image: meeting-chat #镜像
+    container_name: meeting-chat #容器名称  
+    build:
+      context: .
+      dockerfile: ./build/meeting-chat.Dockerfile
+    ports:
+      - '5001:5001'
+    environment:
+      NODE_ENV: 'production'
+    networks:
+      - common-network
+  nest-service:
+    image: nest-service #镜像
+    container_name: nest-service #容器名称  
+    build:
+      context: .
+      dockerfile: ./build/nest-service.Dockerfile
+    environment:
+      NODE_ENV: 'production'
+    networks:
+      - common-network
+networks:
+  common-network:
+    external: true

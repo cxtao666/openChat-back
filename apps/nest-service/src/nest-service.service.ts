@@ -1,8 +1,5 @@
+import { Book } from '@app/common/types/proto/book/book';
 import { Injectable } from '@nestjs/common';
-
-interface Book {
-  msg: string;
-}
 
 @Injectable()
 export class NestServiceService {

@@ -1,0 +1,151 @@
+/* eslint-disable */
+import * as _m0 from "protobufjs/minimal";
+
+export const protobufPackage = "book";
+
+export interface BookById {
+}
+
+export interface Book {
+  msg: string;
+}
+
+function createBaseBookById(): BookById {
+  return {};
+}
+
+export const BookById = {
+  encode(_: BookById, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): BookById {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseBookById();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): BookById {
+    return {};
+  },
+
+  toJSON(_: BookById): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<BookById>, I>>(base?: I): BookById {
+    return BookById.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<BookById>, I>>(_: I): BookById {
+    const message = createBaseBookById();
+    return message;
+  },
+};
+
+function createBaseBook(): Book {
+  return { msg: "" };
+}
+
+export const Book = {
+  encode(message: Book, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.msg !== "") {
+      writer.uint32(10).string(message.msg);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): Book {
+    const reader = input instanceof _m0.Reader ? input : _m0.Reader.create(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseBook();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          if (tag !== 10) {
+            break;
+          }
+
+          message.msg = reader.string();
+          continue;
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skipType(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): Book {
+    return { msg: isSet(object.msg) ? globalThis.String(object.msg) : "" };
+  },
+
+  toJSON(message: Book): unknown {
+    const obj: any = {};
+    if (message.msg !== "") {
+      obj.msg = message.msg;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<Book>, I>>(base?: I): Book {
+    return Book.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<Book>, I>>(object: I): Book {
+    const message = createBaseBook();
+    message.msg = object.msg ?? "";
+    return message;
+  },
+};
+
+export interface BookService {
+  getHello(request: BookById): Promise<Book>;
+}
+
+export const BookServiceServiceName = "book.BookService";
+export class BookServiceClientImpl implements BookService {
+  private readonly rpc: Rpc;
+  private readonly service: string;
+  constructor(rpc: Rpc, opts?: { service?: string }) {
+    this.service = opts?.service || BookServiceServiceName;
+    this.rpc = rpc;
+    this.getHello = this.getHello.bind(this);
+  }
+  getHello(request: BookById): Promise<Book> {
+    const data = BookById.encode(request).finish();
+    const promise = this.rpc.request(this.service, "getHello", data);
+    return promise.then((data) => Book.decode(_m0.Reader.create(data)));
+  }
+}
+
+interface Rpc {
+  request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
+}
+
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
+  : Partial<T>;
+
+type KeysOfUnion<T> = T extends T ? keyof T : never;
+export type Exact<P, I extends P> = P extends Builtin ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+
+function isSet(value: any): boolean {
+  return value !== null && value !== undefined;
+}

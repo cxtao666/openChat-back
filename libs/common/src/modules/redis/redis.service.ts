@@ -1,3 +1,4 @@
+import { isProd } from '@app/common/common';
 import { Injectable } from '@nestjs/common';
 import { Redis } from 'ioredis';
 
@@ -6,9 +7,11 @@ export class RedisService {
   private client: Redis;
 
   constructor() {
+    // 连接redis的sentinel服务器
+    const host = isProd() ? 'redis-sentinel' : process.env.DEV_HOST; // Redis服务器的地址
     this.client = new Redis({
-      host: 'redis-sentinel', // Redis服务器的地址
-      port: 26379, // Redis服务器的端口
+      sentinels: [{ host, port: 26379 }],
+      name: 'mymaster',
     });
   }
 

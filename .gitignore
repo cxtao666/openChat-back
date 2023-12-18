@@ -5,6 +5,8 @@
 /es
 /etcd
 
+/logs
+
 # Logs
 logs
 *.log

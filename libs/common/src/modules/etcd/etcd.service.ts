@@ -1,3 +1,4 @@
+import { isProd } from '@app/common/common';
 import { Injectable } from '@nestjs/common';
 import { Etcd3, IOptions } from 'etcd3';
 
@@ -6,8 +7,11 @@ export class EtcdService {
   private etcd: Etcd3;
 
   constructor() {
+    const ectHost = isProd()
+      ? 'docker-etcd:2379'
+      : `${process.env.DEV_HOST}:2379`;
     const options: IOptions = {
-      hosts: 'docker-etcd:2379', // etcd服务器的地址
+      hosts: ectHost, // etcd服务器的地址
     };
     this.etcd = new Etcd3(options);
   }

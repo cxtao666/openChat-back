@@ -21,7 +21,8 @@ import { SentryMiddleware } from '@app/common/index';
 import { SentryModule } from '@app/common/index';
 import { ZipkinModule } from '@app/common/index';
 import { CustomLogModule } from '@app/common/index';
-const isProd = process.env.NODE_ENV === 'production';
+import { isProd } from '@app/common/common';
+import { protobufPackage } from '@app/common/types/proto/book/book';
 
 @Module({
   imports: [
@@ -30,9 +31,9 @@ const isProd = process.env.NODE_ENV === 'production';
         name: 'NEST_SERVICE',
         transport: Transport.GRPC,
         options: {
-          url: `${isProd ? 'nest-service' : 'localhost'}:4000`,
-          package: 'book',
-          protoPath: join(__dirname, 'book/book.proto'),
+          url: `${isProd() ? 'nest-service' : 'localhost'}:4000`,
+          package: protobufPackage,
+          protoPath: join(process.cwd(), './proto/book/book.proto'),
         },
       },
     ]),
@@ -58,7 +59,7 @@ const isProd = process.env.NODE_ENV === 'production';
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(ZipkinMiddleware).forRoutes('*');
+    // consumer.apply(ZipkinMiddleware).forRoutes('*');
     consumer.apply(SentryMiddleware).forRoutes('*');
   }
 }

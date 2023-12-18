@@ -3,6 +3,8 @@ import { readEnv } from '../../../libs/common/src/common/readEnv';
 readEnv(); //将环境变量挂载到进程的env中
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { register, collectDefaultMetrics } from 'prom-client';
+collectDefaultMetrics();
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

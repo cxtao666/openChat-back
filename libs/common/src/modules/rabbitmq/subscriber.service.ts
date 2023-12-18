@@ -1,25 +1,31 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Query } from '@nestjs/common';
 import { RabbitMQService } from './rabbitmq.service';
 
 @Injectable()
 export class SubscriberService {
   constructor(private rabbitMQService: RabbitMQService) {}
 
-  async subscribeToMessages() {
-    const channel = await this.rabbitMQService.getConnection().createChannel();
-    const exchangeName = 'my-exchange';
-    const queueName = 'my-queue';
+  async subscribeToMessages(queue: string, cb: (message: string) => void) {
+    await this.rabbitMQService.connectQueue(queue, (message) => {
+      cb(message);
+    });
+  }
 
-    channel.assertExchange(exchangeName, 'direct', { durable: false });
-    const q = await channel.assertQueue(queueName, { exclusive: false });
-    channel.bindQueue(q.queue, exchangeName, '');
-
-    channel.consume(
-      q.queue,
-      (msg) => {
-        console.log(`Received: ${msg.content.toString()}`);
-      },
-      { noAck: true },
+  async subscribeToExchange(
+    exChange: string,
+    queue: string,
+    type: 'direct' | 'fanout' | 'topic' | 'headers',
+    route: string,
+    cb: (message: string) => void,
+    headers?: Record<string, string>,
+  ) {
+    await this.rabbitMQService.subscribeExchange(
+      cb,
+      exChange,
+      queue,
+      type,
+      route,
+      headers,
     );
   }
 }

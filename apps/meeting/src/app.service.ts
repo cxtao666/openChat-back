@@ -1,15 +1,6 @@
+import { BookService } from '@app/common/types/proto/book/book';
 import { Inject, Injectable } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
-
-interface FindById {
-  id: number;
-}
-interface Book {
-  msg: string;
-}
-interface BookService {
-  getHello(param: FindById): Book;
-}
 
 @Injectable()
 export class AppService {

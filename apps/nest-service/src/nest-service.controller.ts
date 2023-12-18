@@ -1,10 +1,7 @@
 import { Controller } from '@nestjs/common';
 import { NestServiceService } from './nest-service.service';
 import { GrpcMethod } from '@nestjs/microservices';
-
-interface Book {
-  msg: string;
-}
+import { Book } from '@app/common/types/proto/book/book';
 
 @Controller()
 export class NestServiceController {
