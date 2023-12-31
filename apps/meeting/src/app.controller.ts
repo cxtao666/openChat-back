@@ -7,8 +7,9 @@ import { PublisherService } from '@app/common/modules/rabbitmq/publisher.service
 import { SubscriberService } from '@app/common/modules/rabbitmq/subscriber.service';
 import { ElasticsearchService } from '@app/common/modules/es/es.service';
 import { register } from 'prom-client';
+import { EtcdService } from '@app/common/modules/etcd/etcd.service';
 
-@Controller('/api')
+@Controller('/')
 export class AppController {
   constructor(
     private readonly appService: AppService,
@@ -17,6 +18,7 @@ export class AppController {
     private publicer: PublisherService,
     private subscribe: SubscriberService,
     private es: ElasticsearchService,
+    private etcdService: EtcdService,
   ) {}
 
   @ApiOperation({ summary: '请求微服务', description: '微服务测试' })
@@ -24,25 +26,25 @@ export class AppController {
     status: HttpStatus.OK,
     description: '请求成功',
   })
-  @Get('/rpc')
+  @Get('/api/rpc')
   async sayHello() {
     return await this.appService.getHello();
   }
 
-  @Get('/redis')
+  @Get('/api/redis')
   async testRedis() {
     await this.redis.setValue('foo', 'bar');
     return await this.redis.getValue('foo');
   }
 
-  @Get('/log')
+  @Get('/api/log')
   async testLog() {
     console.log('测试一下请求');
     this.log.info('测试一下请求');
     return 'ok';
   }
 
-  @Get('/rabit')
+  @Get('/api/rabit')
   async rabit() {
     const send = await this.publicer.publishMessage('test', '111');
     const res = await this.subscribe.subscribeToMessages('test', (message) => {
@@ -75,7 +77,7 @@ export class AppController {
     return res;
   }
 
-  @Get('/es')
+  @Get('/api/es')
   async testEs() {
     await this.es.indexDocument('index', {
       test: '1234',
@@ -86,5 +88,13 @@ export class AppController {
   @Get('/metrics')
   async metrics() {
     return register.metrics();
+  }
+
+  @Get('/api/etcd')
+  async etcd() {
+    await this.etcdService.setValue('key', 'value');
+    const data = await this.etcdService.getValue('key');
+    console.log(data);
+    return data;
   }
 }
