@@ -1,6 +1,7 @@
 version: '3.7'
 
 services:
+
   # The 'setup' service runs a one-off script which initializes users inside
   # Elasticsearch — such as 'logstash_internal' and 'kibana_system' — with the
   # values of the passwords defined in the '.env' file. It also creates the
@@ -82,6 +83,23 @@ services:
     depends_on:
       - elasticsearch
     restart: unless-stopped
+
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    depends_on:
+      - elasticsearch
+    links:
+      - elasticsearch
+    restart: always
+    ports:
+      - 9411:9411
+    environment:
+      - TZ=Asia/Shanghai
+      - STORAGE_TYPE=elasticsearch
+      - ES_HOSTS=http://elasticsearch:9200
+    networks:
+      - common-network
 
 networks:
   common-network:
