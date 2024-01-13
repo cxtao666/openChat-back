@@ -18,10 +18,18 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@app/common": ["libs/common/src"],
-      "@app/common/*": ["libs/common/src/*"],
-      "@app/meeting": ["apps/meeting/src"],
-      "@app/meeting/*": ["apps/meeting/src/*"]
+      "@app/common": [
+        "libs/common/src"
+      ],
+      "@app/common/*": [
+        "libs/common/src/*"
+      ],
+      "@app/meeting": [
+        "apps/meeting/src"
+      ],
+      "@app/meeting/*": [
+        "apps/meeting/src/*"
+      ]
     }
   }
 }
