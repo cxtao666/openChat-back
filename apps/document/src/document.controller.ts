@@ -5,8 +5,9 @@ import { DocumentService } from './document.service';
 export class DocumentController {
   constructor(private readonly documentService: DocumentService) {}
 
-  @Get()
-  getHello(): string {
-    return this.documentService.getHello();
+
+  @Get('/api/rpc')
+  async sayHello() {
+    return await this.documentService.getHello();
   }
 }

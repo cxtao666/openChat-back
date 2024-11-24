@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package book;
 
+option go_package = "proto/book;book";
+
 service BookService {
   rpc getHello (BookById) returns (Book) {};
 }

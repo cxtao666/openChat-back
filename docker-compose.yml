@@ -117,8 +117,8 @@ services:
       - '26379:26379'
     networks:
       - common-network
-  kong-database:
-    image: postgres:9.6
+  kong-db:
+    image: postgres:13-alpine
     restart: always  #每次总是启动
     networks: 
       - common-network
@@ -128,6 +128,21 @@ services:
       POSTGRES_PASSWORD: kong
     ports:
       - "5432:5432"
+  kong:
+    image: kong:latest
+    container_name: kong
+    environment:
+      KONG_DATABASE: postgres
+      KONG_PG_HOST: kong-db
+      KONG_PG_PASSWORD: kong
+      KONG_ADMIN_LISTEN: 0.0.0.0:8001
+    ports:
+      - "8000:8000" #
+      - "8001:8001" # 
+    networks:
+      - common-network
+    depends_on:
+      - kong-db
   prometheus:
     image: prom/prometheus
     container_name: prometheus
@@ -146,6 +161,17 @@ services:
     container_name: grafana
     depends_on:
       - prometheus
+    networks:
+      - common-network
+  consul:
+    image: consul:1.15.4
+    container_name: consul
+    ports:
+      - "8500:8500"        # HTTP API 和 Web UI
+      - "8600:8600/udp"    # DNS 解析
+    command: agent -dev -client=0.0.0.0
+    volumes:
+      - ./data/consul:/consul/data
     networks:
       - common-network
 networks:

@@ -83,6 +83,15 @@
       "compilerOptions": {
         "tsConfigPath": "apps/admin/tsconfig.app.json"
       }
+    },
+    "api-getway": {
+      "type": "application",
+      "root": "apps/api-getway",
+      "entryFile": "main",
+      "sourceRoot": "apps/api-getway/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/api-getway/tsconfig.app.json"
+      }
     }
   }
 }

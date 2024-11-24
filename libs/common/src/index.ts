@@ -1,3 +1,4 @@
+import { ConsulModule } from './modules/consul/consul.module';
 export { ElasticsearchModule } from './modules/es/es.module';
 export { EtcdModule } from './modules/etcd/etcd.module';
 export { RedisModule } from './modules/redis/redis.module';

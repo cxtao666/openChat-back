@@ -8,6 +8,7 @@ import { SubscriberService } from '@app/common/modules/rabbitmq/subscriber.servi
 import { ElasticsearchService } from '@app/common/modules/es/es.service';
 import { register } from 'prom-client';
 import { EtcdService } from '@app/common/modules/etcd/etcd.service';
+import { ConsulService } from '../../../libs/common/src/modules/consul/consul.service';
 
 @Controller('/')
 export class AppController {
@@ -19,7 +20,10 @@ export class AppController {
     private subscribe: SubscriberService,
     private es: ElasticsearchService,
     private etcdService: EtcdService,
-  ) {}
+    private consulService: ConsulService,
+  ) {
+   // consulService.registerService('app', '127.0.01', 3000);
+  }
 
   @ApiOperation({ summary: '请求微服务', description: '微服务测试' })
   @ApiResponse({
@@ -96,5 +100,10 @@ export class AppController {
     const data = await this.etcdService.getValue('key');
     console.log(data);
     return data;
+  }
+
+  @Get('health')
+  health() {
+    return { status: 'UP' };
   }
 }

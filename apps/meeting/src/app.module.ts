@@ -23,6 +23,7 @@ import { ZipkinModule } from '@app/common/index';
 import { CustomLogModule } from '@app/common/index';
 import { isProd } from '@app/common/common';
 import { protobufPackage } from '@app/common/types/proto/book/book';
+import { ConsulModule } from '@app/common/modules/consul/consul.module';
 
 @Module({
   imports: [
@@ -53,6 +54,7 @@ import { protobufPackage } from '@app/common/types/proto/book/book';
     RabbitMQModule,
     ElasticsearchModule,
     CustomLogModule,
+    ConsulModule
   ],
   controllers: [AppController],
   providers: [AppService],
